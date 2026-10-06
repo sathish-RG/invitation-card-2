@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eleanor & James · June 12, 2027</title>
+  <meta name="description" content="Join Eleanor Hart and James Whitaker as they celebrate their wedding at Whitmore Estate, Napa Valley, California." />
+  <meta name="theme-color" content="#FAF6EF" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet" />
+
+  <!-- AOS (scroll animations) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory:     { DEFAULT: '#FAF6EF', deep: '#F3ECE0' },
+            champagne: { DEFAULT: '#C9A96E', light: '#E6D5B0', dark: '#A88A50' },
+            sage:      { DEFAULT: '#9CAF94', light: '#DCE4D6', dark: '#6F8467' },
+            rose:      { DEFAULT: '#D4A5A0', light: '#F1DEDA' },
+            charcoal:  { DEFAULT: '#2F2E2C', soft: '#5A5753' },
+          },
+          fontFamily: {
+            serif:  ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans:   ['Inter', 'system-ui', 'sans-serif'],
+            script: ['"Pinyon Script"', 'cursive'],
+          },
+          letterSpacing: { luxe: '0.32em' },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { background: #FAF6EF; color: #2F2E2C; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #E6D5B0; color: #2F2E2C; }
+
+    /* Subtle paper grain */
+    .grain::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60; opacity: .035;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+
+    .eyebrow { font-family: Inter, sans-serif; font-size: .7rem; letter-spacing: .32em; text-transform: uppercase; color: #A88A50; }
+
+    /* Gold hairline divider with diamond */
+    .divider { display: flex; align-items: center; gap: 1rem; justify-content: center; }
+    .divider::before, .divider::after { content: ""; height: 1px; width: 4rem; background: linear-gradient(90deg, transparent, #C9A96E); }
+    .divider::after { transform: scaleX(-1); }
+    .divider span { width: 6px; height: 6px; transform: rotate(45deg); border: 1px solid #C9A96E; }
+
+    /* Buttons */
+    .btn {
+      position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      padding: .95rem 2.2rem; font: 500 .72rem/1 Inter, sans-serif; letter-spacing: .28em; text-transform: uppercase;
+      border: 1px solid #2F2E2C; color: #2F2E2C; overflow: hidden; isolation: isolate;
+      transition: color .5s cubic-bezier(.2,.8,.2,1), border-color .5s;
+    }
+    .btn::before {
+      content: ""; position: absolute; inset: 0; background: #2F2E2C; z-index: -1;
+      transform: scaleX(0); transform-origin: right; transition: transform .6s cubic-bezier(.2,.8,.2,1);
+    }
+    .btn:hover { color: #FAF6EF; }
+    .btn:hover::before { transform: scaleX(1); transform-origin: left; }
+    .btn-gold { border-color: #C9A96E; background: #C9A96E; color: #fff; }
+    .btn-gold::before { background: #2F2E2C; }
+    .btn-gold:hover { border-color: #2F2E2C; }
+    .btn:focus-visible { outline: 2px solid #C9A96E; outline-offset: 3px; }
+
+    /* Underline link */
+    .link-u { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .4s; }
+    .link-u:hover { background-size: 100% 1px; }
+
+    /* Nav */
+    #nav.scrolled { background: rgba(250,246,239,.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(201,169,110,.25); }
+
+    /* Countdown */
+    .count-num { font-variant-numeric: tabular-nums; }
+
+    /* Timeline */
+    .timeline::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: linear-gradient(#C9A96E00, #C9A96E 10%, #C9A96E 90%, #C9A96E00); }
+    @media (max-width: 767px) { .timeline::before { left: 11px; } }
+
+    /* Masonry */
+    .masonry { column-count: 1; column-gap: 1rem; }
+    @media (min-width: 640px)  { .masonry { column-count: 2; } }
+    @media (min-width: 1024px) { .masonry { column-count: 3; column-gap: 1.25rem; } }
+    .masonry > * { break-inside: avoid; margin-bottom: 1rem; }
+    @media (min-width: 1024px) { .masonry > * { margin-bottom: 1.25rem; } }
+    .img-fallback { background: linear-gradient(135deg, #F1DEDA, #E6D5B0 50%, #DCE4D6); }
+
+    /* Lightbox */
+    #lightbox { transition: opacity .4s ease; }
+    #lightbox.open { opacity: 1; pointer-events: auto; }
+    #lightbox img { transition: opacity .35s ease, transform .5s cubic-bezier(.2,.8,.2,1); }
+
+    /* Form */
+    .field { width: 100%; background: transparent; border: 0; border-bottom: 1px solid #CFC6B6; padding: .85rem 0; font: 400 1rem Inter, sans-serif; color: #2F2E2C; border-radius: 0; transition: border-color .3s; }
+    .field:focus { outline: none; border-color: #C9A96E; }
+    .field::placeholder { color: #A39D93; }
+    .field.invalid { border-color: #C47A70; }
+    .err { color: #B5655B; font-size: .75rem; margin-top: .35rem; min-height: 1rem; font-family: Inter, sans-serif; }
+    select.field { appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23A88A50' stroke-width='1.2'><path d='M1 1l5 5 5-5'/></svg>"); background-repeat: no-repeat; background-position: right .25rem center; padding-right: 1.5rem; }
+
+    .choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice span { display: block; text-align: center; padding: 1rem .75rem; border: 1px solid #DCD3C3; transition: all .35s; cursor: pointer; }
+    .choice:hover span { border-color: #C9A96E; }
+    .choice input:checked + span { border-color: #C9A96E; background: #C9A96E14; box-shadow: inset 0 0 0 1px #C9A96E; }
+    .choice input:focus-visible + span { outline: 2px solid #C9A96E; outline-offset: 2px; }
+
+    /* Music button pulse */
+    .music-on .bar { animation: eq 1.1s ease-in-out infinite; }
+    .bar { display: inline-block; width: 2px; height: 4px; background: currentColor; margin: 0 1px; border-radius: 1px; transition: height .3s; }
+    .music-on .bar:nth-child(2) { animation-delay: .2s; } .music-on .bar:nth-child(3) { animation-delay: .4s; } .music-on .bar:nth-child(4) { animation-delay: .1s; }
+    @keyframes eq { 0%,100% { height: 4px; } 50% { height: 14px; } }
+
+    /* Hero */
+    .hero-bg { background-image: linear-gradient(180deg, rgba(250,246,239,.55) 0%, rgba(250,246,239,.75) 55%, #FAF6EF 100%), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=70'); background-size: cover; background-position: center 30%; }
+    @keyframes slowzoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+    .hero-bg { animation: slowzoom 14s ease-out both; }
+    @keyframes scrollcue { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
+    .scroll-cue::after { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 50%; background: #2F2E2C; animation: scrollcue 2.2s ease-in-out infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+
+<body class="grain font-sans antialiased overflow-x-hidden">
+
+  <!-- ============ NAVIGATION ============ -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-500">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-10">
+      <a href="#home" class="font-serif text-2xl italic tracking-wide">E <span class="text-champagne">&amp;</span> J</a>
+
+      <ul class="hidden items-center gap-8 text-[0.68rem] uppercase tracking-[0.25em] text-charcoal-soft lg:flex">
+        <li><a class="link-u hover:text-charcoal" href="#story">Our Story</a></li>
+        <li><a class="link-u hover:text-charcoal" href="#schedule">Schedule</a></li>
+        <li><a class="link-u hover:text-charcoal" href="#travel">Travel</a></li>
+        <li><a class="link-u hover:text-charcoal" href="#gallery">Gallery</a></li>
+        <li><a class="link-u hover:text-charcoal" href="#registry">Registry</a></li>
+        <li><a href="#rsvp" class="border border-champagne px-5 py-2.5 text-charcoal transition hover:bg-champagne hover:text-white">RSVP</a></li>
+      </ul>
+
+      <button id="menuBtn" class="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden" aria-label="Open menu" aria-expanded="false">
+        <span class="block h-px w-6 bg-charcoal transition duration-300"></span>
+        <span class="block h-px w-6 bg-charcoal transition duration-300"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="pointer-events-none fixed inset-0 z-40 flex flex-col items-center justify-center gap-7 bg-ivory opacity-0 transition-opacity duration-500 lg:hidden">
+      <a href="#story" class="font-serif text-3xl">Our Story</a>
+      <a href="#schedule" class="font-serif text-3xl">Schedule</a>
+      <a href="#travel" class="font-serif text-3xl">Travel</a>
+      <a href="#gallery" class="font-serif text-3xl">Gallery</a>
+      <a href="#registry" class="font-serif text-3xl">Registry</a>
+      <a href="#rsvp" class="btn btn-gold mt-4">RSVP</a>
+    </div>
+  </header>
+
+  <!-- ============ MUSIC TOGGLE ============ -->
+  <button id="musicBtn" class="fixed bottom-5 right-5 z-50 flex h-12 items-center gap-2 rounded-full border border-champagne/60 bg-ivory/90 px-4 text-champagne-dark shadow-lg shadow-charcoal/5 backdrop-blur transition hover:border-champagne hover:bg-white md:bottom-8 md:right-8" aria-label="Play background music" aria-pressed="false">
+    <span class="flex h-4 items-end"><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i></span>
+    <span id="musicLabel" class="text-[0.62rem] uppercase tracking-[0.25em]">Play Music</span>
+  </button>
+  <!-- Drop your own file at assets/music.mp3 (e.g. a licensed piano/acoustic track).
+       If the file is missing, a soft generated piano melody plays instead. -->
+  <audio id="bgMusic" loop preload="none" src="assets/music.mp3"></audio>
+
+  <!-- ============ HERO ============ -->
+  <section id="home" class="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-5 pb-24 pt-28 text-center">
+    <div class="hero-bg absolute inset-0 -z-10"></div>
+
+    <div class="mx-auto max-w-4xl">
+      <p class="eyebrow" data-aos="fade-up">Together with their families</p>
+
+      <h1 class="mt-8 font-serif font-light leading-[0.95] text-charcoal" data-aos="fade-up" data-aos-delay="150">
+        <span class="block text-[clamp(3.4rem,11vw,8.5rem)]">Eleanor</span>
+        <span class="my-1 block font-script text-[clamp(2.4rem,6vw,4.5rem)] text-champagne">and</span>
+        <span class="block text-[clamp(3.4rem,11vw,8.5rem)]">James</span>
+      </h1>
+
+      <p class="mx-auto mt-8 max-w-md font-serif text-xl italic text-charcoal-soft md:text-2xl" data-aos="fade-up" data-aos-delay="300">
+        request the pleasure of your company at the celebration of their marriage
+      </p>
+
+      <div class="divider mt-10" data-aos="fade-up" data-aos-delay="400"><span></span></div>
+
+      <div class="mt-8 flex flex-col items-center gap-2 md:flex-row md:justify-center md:gap-8" data-aos="fade-up" data-aos-delay="450">
+        <p class="font-serif text-2xl tracking-wide md:text-3xl">Saturday, June 12, 2027</p>
+        <span class="hidden h-6 w-px bg-champagne md:block"></span>
+        <p class="text-[0.72rem] uppercase tracking-luxe text-charcoal-soft">Whitmore Estate · Napa Valley, California</p>
+      </div>
+
+      <!-- Countdown -->
+      <div id="countdown" class="mx-auto mt-12 grid max-w-lg grid-cols-4 divide-x divide-champagne/40" data-aos="fade-up" data-aos-delay="550" aria-live="polite">
+        <div class="px-2"><div class="count-num font-serif text-4xl font-light md:text-5xl" data-unit="days">000</div><div class="mt-1 text-[0.6rem] uppercase tracking-[0.25em] text-charcoal-soft">Days</div></div>
+        <div class="px-2"><div class="count-num font-serif text-4xl font-light md:text-5xl" data-unit="hours">00</div><div class="mt-1 text-[0.6rem] uppercase tracking-[0.25em] text-charcoal-soft">Hours</div></div>
+        <div class="px-2"><div class="count-num font-serif text-4xl font-light md:text-5xl" data-unit="minutes">00</div><div class="mt-1 text-[0.6rem] uppercase tracking-[0.25em] text-charcoal-soft">Minutes</div></div>
+        <div class="px-2"><div class="count-num font-serif text-4xl font-light md:text-5xl" data-unit="seconds">00</div><div class="mt-1 text-[0.6rem] uppercase tracking-[0.25em] text-charcoal-soft">Seconds</div></div>
+      </div>
+      <p id="countdownDone" class="mt-12 hidden font-script text-5xl text-champagne">Just married!</p>
+
+      <div class="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row" data-aos="fade-up" data-aos-delay="650">
+        <a href="#rsvp" class="btn btn-gold">Kindly RSVP</a>
+        <button id="calBtn" class="btn">Save the Date</button>
+      </div>
+    </div>
+
+    <a href="#story" class="scroll-cue absolute bottom-8 left-1/2 h-14 w-px -translate-x-1/2 overflow-hidden bg-charcoal/15" aria-label="Scroll down"></a>
+  </section>
+
+  <!-- ============ OUR STORY ============ -->
+  <section id="story" class="px-5 py-24 md:py-36">
+    <div class="mx-auto max-w-6xl">
+      <div class="text-center">
+        <p class="eyebrow" data-aos="fade-up">Chapter One</p>
+        <h2 class="mt-4 font-serif text-5xl font-light md:text-7xl" data-aos="fade-up" data-aos-delay="100">Our <em class="text-champagne">Story</em></h2>
+        <p class="mx-auto mt-6 max-w-xl font-serif text-xl italic leading-relaxed text-charcoal-soft" data-aos="fade-up" data-aos-delay="200">
+          A borrowed umbrella, a missed train, and seven wonderful years later — here’s how we got to forever.
+        </p>
+      </div>
+
+      <div class="timeline relative mt-20 space-y-16 md:space-y-24">
+        <!-- Item -->
+        <article class="relative grid items-center gap-8 pl-10 md:grid-cols-2 md:gap-20 md:pl-0">
+          <span class="absolute left-[5px] top-2 h-3 w-3 rotate-45 border border-champagne bg-ivory md:left-1/2 md:top-1/2 md:-ml-[6px] md:-mt-[6px]"></span>
+          <div class="overflow-hidden md:order-1" data-aos="fade-right">
+            <img loading="lazy" class="img-fallback aspect-[4/3] w-full object-cover transition duration-[1.2s] hover:scale-105" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1000&q=70" alt="Eleanor and James laughing together on a city street" />
+          </div>
+          <div class="md:order-2" data-aos="fade-left" data-aos-delay="100">
+            <p class="eyebrow">October 2019 · London</p>
+            <h3 class="mt-3 font-serif text-4xl font-light">How We Met</h3>
+            <p class="mt-5 leading-relaxed text-charcoal-soft">
+              A sudden downpour outside Paddington Station, one umbrella, and two strangers both late for the same delayed train.
+              By the time it finally arrived, we’d already planned a second coffee. James still claims he “let” Eleanor keep the umbrella.
+            </p>
+          </div>
+        </article>
+
+        <article class="relative grid items-center gap-8 pl-10 md:grid-cols-2 md:gap-20 md:pl-0">
+          <span class="absolute left-[5px] top-2 h-3 w-3 rotate-45 border border-champagne bg-ivory md:left-1/2 md:top-1/2 md:-ml-[6px] md:-mt-[6px]"></span>
+          <div class="overflow-hidden md:order-2" data-aos="fade-left">
+            <img loading="lazy" class="img-fallback aspect-[4/3] w-full object-cover transition duration-[1.2s] hover:scale-105" src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=1000&q=70" alt="The couple travelling together" />
+          </div>
+          <div class="md:order-1 md:text-right" data-aos="fade-right" data-aos-delay="100">
+            <p class="eyebrow">2020 – 2024 · Everywhere</p>
+            <h3 class="mt-3 font-serif text-4xl font-light">The Journey</h3>
+            <p class="mt-5 leading-relaxed text-charcoal-soft">
+              Long-distance calls across eight time zones, a move to San Francisco, a sourdough starter named Gerald,
+              and a golden retriever named Biscuit. We learned that home isn’t a place — it’s each other.
+            </p>
+          </div>
+        </article>
+
+        <article class="relative grid items-center gap-8 pl-10 md:grid-cols-2 md:gap-20 md:pl-0">
+          <span class="absolute left-[5px] top-2 h-3 w-3 rotate-45 border border-champagne bg-champagne md:left-1/2 md:top-1/2 md:-ml-[6px] md:-mt-[6px]"></span>
+          <div class="overflow-hidden md:order-1" data-aos="fade-right">
+            <img loading="lazy" class="img-fallback aspect-[4/3] w-full object-cover transition duration-[1.2s] hover:scale-105" src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1000&q=70" alt="Engagement ring moment" />
+          </div>
+          <div class="md:order-2" data-aos="fade-left" data-aos-delay="100">
+            <p class="eyebrow">September 2025 · Big Sur</p>
+            <h3 class="mt-3 font-serif text-4xl font-light">The Proposal</h3>
+            <p class="mt-5 leading-relaxed text-charcoal-soft">
+              On a cliffside hike at sunset — the same trail from our very first trip together — James dropped to one knee,
+              Biscuit barked, and Eleanor said yes before he could finish the question.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUOTE BAND ============ -->
+  <section class="bg-sage-light/60 px-5 py-20 text-center md:py-28">
+    <p class="mx-auto max-w-3xl font-serif text-3xl font-light italic leading-snug md:text-5xl" data-aos="fade-up">
+      “Whatever our souls are made of, his and mine are the same.”
+    </p>
+    <p class="eyebrow mt-6 !text-sage-dark" data-aos="fade-up" data-aos-delay="100">Emily Brontë</p>
+  </section>
+
+  <!-- ============ SCHEDULE ============ -->
+  <section id="schedule" class="px-5 py-24 md:py-36">
+    <div class="mx-auto max-w-6xl">
+      <div class="text-center">
+        <p class="eyebrow" data-aos="fade-up">Saturday · June 12, 2027</p>
+        <h2 class="mt-4 font-serif text-5xl font-light md:text-7xl" data-aos="fade-up" data-aos-delay="100">The <em class="text-champagne">Wedding Day</em></h2>
+      </div>
+
+      <div class="mt-16 grid gap-px overflow-hidden border border-champagne/30 bg-champagne/30 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="group bg-ivory p-8 transition duration-500 hover:bg-white md:p-10" data-aos="fade-up">
+          <svg class="h-9 w-9 text-champagne transition duration-500 group-hover:-translate-y-1" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 48 48"><path d="M24 6v6M18 12h12M14 42V22l10-8 10 8v20M20 42V32a4 4 0 018 0v10M8 42h32"/></svg>
+          <p class="mt-8 font-serif text-4xl font-light">4:00 <span class="text-xl">PM</span></p>
+          <h3 class="mt-2 text-[0.7rem] uppercase tracking-luxe text-champagne-dark">Ceremony</h3>
+          <p class="mt-4 text-sm leading-relaxed text-charcoal-soft">The Olive Grove Lawn. Please arrive by 3:30 PM — the vows begin promptly.</p>
+        </div>
+        <div class="group bg-ivory p-8 transition duration-500 hover:bg-white md:p-10" data-aos="fade-up" data-aos-delay="100">
+          <svg class="h-9 w-9 text-champagne transition duration-500 group-hover:-translate-y-1" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 48 48"><path d="M14 6h20l-2 14a8 8 0 01-16 0L14 6zM24 28v12M17 42h14M15 13h18"/></svg>
+          <p class="mt-8 font-serif text-4xl font-light">5:00 <span class="text-xl">PM</span></p>
+          <h3 class="mt-2 text-[0.7rem] uppercase tracking-luxe text-champagne-dark">Cocktail Hour</h3>
+          <p class="mt-4 text-sm leading-relaxed text-charcoal-soft">Estate wines, lawn games and live string trio on the Vineyard Terrace.</p>
+        </div>
+        <div class="group bg-ivory p-8 transition duration-500 hover:bg-white md:p-10" data-aos="fade-up" data-aos-delay="200">
+          <svg class="h-9 w-9 text-champagne transition duration-500 group-hover:-translate-y-1" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 48 48"><circle cx="24" cy="26" r="11"/><circle cx="24" cy="26" r="15"/><path d="M5 12v10a3 3 0 003 3v15M5 12v8M11 12v10a3 3 0 01-3 3M43 12c-3 0-4 5-4 12h4v16"/></svg>
+          <p class="mt-8 font-serif text-4xl font-light">6:30 <span class="text-xl">PM</span></p>
+          <h3 class="mt-2 text-[0.7rem] uppercase tracking-luxe text-champagne-dark">Dinner</h3>
+          <p class="mt-4 text-sm leading-relaxed text-charcoal-soft">A seated, farm-to-table supper under the oaks in the Barrel Room courtyard.</p>
+        </div>
+        <div class="group bg-ivory p-8 transition duration-500 hover:bg-white md:p-10" data-aos="fade-up" data-aos-delay="300">
+          <svg class="h-9 w-9 text-champagne transition duration-500 group-hover:-translate-y-1" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 48 48"><path d="M18 36V10l20-4v26"/><circle cx="13" cy="36" r="5"/><circle cx="33" cy="32" r="5"/><path d="M18 16l20-4"/></svg>
+          <p class="mt-8 font-serif text-4xl font-light">8:00 <span class="text-xl">PM</span></p>
+          <h3 class="mt-2 text-[0.7rem] uppercase tracking-luxe text-champagne-dark">Reception</h3>
+          <p class="mt-4 text-sm leading-relaxed text-charcoal-soft">First dance, cake, toasts — then dancing beneath the string lights until midnight.</p>
+        </div>
+      </div>
+
+      <p class="mt-10 text-center text-sm text-charcoal-soft" data-aos="fade-up">
+        Shuttles depart the hotels at 3:00 PM and return at 10:30 PM &amp; 12:15 AM.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ VENUE & TRAVEL ============ -->
+  <section id="travel" class="bg-ivory-deep px-5 py-24 md:py-36">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div class="relative" data-aos="fade-right">
+          <div class="overflow-hidden">
+            <img loading="lazy" class="img-fallback aspect-[4/5] w-full object-cover" src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1100&q=70" alt="Vineyard at golden hour" />
+          </div>
+          <div class="absolute -bottom-6 -right-2 bg-ivory px-6 py-5 shadow-xl shadow-charcoal/5 sm:-right-6 md:px-8 md:py-6">
+            <p class="eyebrow">The Venue</p>
+            <p class="mt-1 font-serif text-2xl">Whitmore Estate</p>
+            <p class="text-sm text-charcoal-soft">1250 Silverado Trail, Napa, CA</p>
+          </div>
+        </div>
+
+        <div data-aos="fade-left" data-aos-delay="100">
+          <p class="eyebrow">Venue &amp; Travel</p>
+          <h2 class="mt-4 font-serif text-5xl font-light md:text-6xl">Napa <em class="text-champagne">Valley</em></h2>
+          <p class="mt-6 leading-relaxed text-charcoal-soft">
+            Nestled among rolling vineyards and century-old olive trees, Whitmore Estate is where we spent our first anniversary.
+            We can’t wait to share its golden-hour magic with you.
+          </p>
+          <a href="https://maps.google.com/?q=Silverado+Trail+Napa+CA" target="_blank" rel="noopener" class="btn mt-8">
+            Get Directions
+            <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 12 12"><path d="M3 9l6-6M4 3h5v5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Travel cards -->
+      <div class="mt-24 grid gap-6 md:grid-cols-3">
+        <div class="border border-champagne/30 bg-ivory p-8 transition duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-charcoal/5" data-aos="fade-up">
+          <p class="eyebrow">01 · Stay</p>
+          <h3 class="mt-3 font-serif text-3xl">Accommodations</h3>
+          <ul class="mt-5 space-y-4 text-sm leading-relaxed text-charcoal-soft">
+            <li><strong class="font-medium text-charcoal">The Meadowood Inn</strong><br />Room block under “Hart–Whitaker” until April 30. ~8 min to venue.</li>
+            <li><strong class="font-medium text-charcoal">Carneros Garden Hotel</strong><br />Use code <span class="font-medium text-champagne-dark">EJ2027</span> for 15% off. ~15 min.</li>
+          </ul>
+        </div>
+        <div class="border border-champagne/30 bg-ivory p-8 transition duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-charcoal/5" data-aos="fade-up" data-aos-delay="100">
+          <p class="eyebrow">02 · Getting Here</p>
+          <h3 class="mt-3 font-serif text-3xl">Transport</h3>
+          <ul class="mt-5 space-y-4 text-sm leading-relaxed text-charcoal-soft">
+            <li><strong class="font-medium text-charcoal">Fly into</strong><br />Oakland (OAK) or San Francisco (SFO) — about 1 hr 15 min by car.</li>
+            <li><strong class="font-medium text-charcoal">On the day</strong><br />Complimentary shuttles from both hotels. Parking at the estate is limited.</li>
+          </ul>
+        </div>
+        <div class="border border-champagne/30 bg-ivory p-8 transition duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-charcoal/5" data-aos="fade-up" data-aos-delay="200">
+          <p class="eyebrow">03 · Attire</p>
+          <h3 class="mt-3 font-serif text-3xl">Dress Code</h3>
+          <p class="mt-5 text-sm leading-relaxed text-charcoal-soft">
+            <strong class="font-medium text-charcoal">Black-Tie Optional.</strong> Think floor-length gowns, cocktail dresses or tuxedos and dark suits.
+          </p>
+          <p class="mt-4 text-sm leading-relaxed text-charcoal-soft">The ceremony is on grass — block heels are your friend. Evenings get cool, so bring a wrap.</p>
+          <div class="mt-5 flex gap-2" aria-label="Suggested palette">
+            <span class="h-6 w-6 rounded-full bg-sage" title="Sage"></span>
+            <span class="h-6 w-6 rounded-full bg-rose" title="Dusty rose"></span>
+            <span class="h-6 w-6 rounded-full bg-champagne" title="Champagne"></span>
+            <span class="h-6 w-6 rounded-full bg-charcoal" title="Charcoal"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section id="gallery" class="px-5 py-24 md:py-36">
+    <div class="mx-auto max-w-7xl">
+      <div class="text-center">
+        <p class="eyebrow" data-aos="fade-up">Engagement Session</p>
+        <h2 class="mt-4 font-serif text-5xl font-light md:text-7xl" data-aos="fade-up" data-aos-delay="100">Moments <em class="text-champagne">&amp; Memories</em></h2>
+      </div>
+
+      <div id="galleryGrid" class="masonry mt-16"><!-- Filled by JS --></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="pointer-events-none fixed inset-0 z-[70] flex items-center justify-center bg-charcoal/95 p-4 opacity-0" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button id="lbClose" class="absolute right-4 top-4 p-3 text-ivory/80 transition hover:rotate-90 hover:text-white md:right-8 md:top-8" aria-label="Close">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <button id="lbPrev" class="absolute left-2 top-1/2 -translate-y-1/2 p-3 text-ivory/70 transition hover:-translate-x-1 hover:text-white md:left-8" aria-label="Previous photo">
+      <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8"/></svg>
+    </button>
+    <figure class="flex max-h-full max-w-5xl flex-col items-center">
+      <img id="lbImg" class="max-h-[80vh] w-auto object-contain" src="" alt="" />
+      <figcaption id="lbCap" class="mt-4 font-serif text-lg italic text-ivory/80"></figcaption>
+      <p id="lbCount" class="mt-1 text-[0.65rem] uppercase tracking-[0.3em] text-champagne"></p>
+    </figure>
+    <button id="lbNext" class="absolute right-2 top-1/2 -translate-y-1/2 p-3 text-ivory/70 transition hover:translate-x-1 hover:text-white md:right-8" aria-label="Next photo">
+      <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg>
+    </button>
+  </div>
+
+  <!-- ============ REGISTRY ============ -->
+  <section id="registry" class="bg-rose-light/50 px-5 py-24 md:py-36">
+    <div class="mx-auto max-w-5xl text-center">
+      <p class="eyebrow" data-aos="fade-up">Registry</p>
+      <h2 class="mt-4 font-serif text-5xl font-light md:text-7xl" data-aos="fade-up" data-aos-delay="100">With <em class="text-champagne">Gratitude</em></h2>
+      <p class="mx-auto mt-6 max-w-2xl font-serif text-xl italic leading-relaxed text-charcoal-soft" data-aos="fade-up" data-aos-delay="200">
+        Your presence is truly the greatest gift. Should you wish to honour us with something more, we’ve put together a few ideas below.
+      </p>
+
+      <div class="mt-16 grid gap-6 md:grid-cols-3">
+        <a href="#" class="group block bg-ivory p-10 transition duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-rose/20" data-aos="fade-up">
+          <p class="font-serif text-5xl text-champagne">✈</p>
+          <h3 class="mt-5 font-serif text-3xl">Honeymoon Fund</h3>
+          <p class="mt-3 text-sm leading-relaxed text-charcoal-soft">Help us explore the Amalfi Coast — one limoncello at a time.</p>
+          <span class="mt-6 inline-block text-[0.68rem] uppercase tracking-[0.28em] text-champagne-dark link-u">Contribute →</span>
+        </a>
+        <a href="#" class="group block bg-ivory p-10 transition duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-rose/20" data-aos="fade-up" data-aos-delay="100">
+          <p class="font-serif text-5xl text-champagne">❦</p>
+          <h3 class="mt-5 font-serif text-3xl">Zola</h3>
+          <p class="mt-3 text-sm leading-relaxed text-charcoal-soft">Home essentials and a few cooking adventures for our first home.</p>
+          <span class="mt-6 inline-block text-[0.68rem] uppercase tracking-[0.28em] text-champagne-dark link-u">View Registry →</span>
+        </a>
+        <a href="#" class="group block bg-ivory p-10 transition duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-rose/20" data-aos="fade-up" data-aos-delay="200">
+          <p class="font-serif text-5xl text-champagne">♡</p>
+          <h3 class="mt-5 font-serif text-3xl">Give Back</h3>
+          <p class="mt-3 text-sm leading-relaxed text-charcoal-soft">A donation to the local animal rescue where we adopted Biscuit.</p>
+          <span class="mt-6 inline-block text-[0.68rem] uppercase tracking-[0.28em] text-champagne-dark link-u">Donate →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RSVP ============ -->
+  <section id="rsvp" class="px-5 py-24 md:py-36">
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center">
+        <p class="eyebrow" data-aos="fade-up">Kindly reply by April 15, 2027</p>
+        <h2 class="mt-4 font-serif text-5xl font-light md:text-7xl" data-aos="fade-up" data-aos-delay="100">R.S.V.P.</h2>
+        <div class="divider mt-8" data-aos="fade-up" data-aos-delay="150"><span></span></div>
+      </div>
+
+      <div class="relative mt-14 border border-champagne/30 bg-white/60 p-6 shadow-2xl shadow-charcoal/5 sm:p-10 md:p-14" data-aos="fade-up" data-aos-delay="200">
+        <form id="rsvpForm" novalidate class="space-y-8">
+          <div class="grid gap-8 sm:grid-cols-2">
+            <div>
+              <label for="name" class="eyebrow">Full Name *</label>
+              <input id="name" name="name" type="text" autocomplete="name" class="field" placeholder="Your name" />
+              <p class="err" data-for="name"></p>
+            </div>
+            <div>
+              <label for="email" class="eyebrow">Email *</label>
+              <input id="email" name="email" type="email" autocomplete="email" class="field" placeholder="you@example.com" />
+              <p class="err" data-for="email"></p>
+            </div>
+          </div>
+
+          <fieldset>
+            <legend class="eyebrow">Will you be joining us? *</legend>
+            <div class="mt-4 grid grid-cols-2 gap-4">
+              <label class="choice relative"><input type="radio" name="attending" value="yes" /><span><span class="!border-0 !p-0 font-serif text-xl">Joyfully Accepts</span></span></label>
+              <label class="choice relative"><input type="radio" name="attending" value="no" /><span><span class="!border-0 !p-0 font-serif text-xl">Regretfully Declines</span></span></label>
+            </div>
+            <p class="err" data-for="attending"></p>
+          </fieldset>
+
+          <!-- Shown only when attending -->
+          <div id="attendingFields" class="grid overflow-hidden transition-all duration-700 ease-out" style="grid-template-rows: 0fr; opacity: 0;">
+            <div class="min-h-0 space-y-8">
+              <div class="grid gap-8 sm:grid-cols-2">
+                <div>
+                  <label for="guests" class="eyebrow">Number of Guests</label>
+                  <select id="guests" name="guests" class="field">
+                    <option value="1">Just me</option>
+                    <option value="2">2 guests</option>
+                  </select>
+                </div>
+                <div id="plusOneWrap" class="hidden">
+                  <label for="plusOne" class="eyebrow">Guest’s Name</label>
+                  <input id="plusOne" name="plusOne" type="text" class="field" placeholder="Their full name" />
+                  <p class="err" data-for="plusOne"></p>
+                </div>
+              </div>
+
+              <fieldset>
+                <legend class="eyebrow">Your Meal Selection *</legend>
+                <div class="mt-4 grid gap-3 sm:grid-cols-3">
+                  <label class="choice relative"><input type="radio" name="meal" value="beef" /><span><span class="!border-0 !p-0 font-serif text-lg">Filet Mignon</span><small class="!border-0 !p-0 mt-1 block text-[0.68rem] text-charcoal-soft">Red wine jus, truffle mash</small></span></label>
+                  <label class="choice relative"><input type="radio" name="meal" value="fish" /><span><span class="!border-0 !p-0 font-serif text-lg">Pan-Seared Halibut</span><small class="!border-0 !p-0 mt-1 block text-[0.68rem] text-charcoal-soft">Lemon beurre blanc</small></span></label>
+                  <label class="choice relative"><input type="radio" name="meal" value="veg" /><span><span class="!border-0 !p-0 font-serif text-lg">Wild Mushroom Risotto</span><small class="!border-0 !p-0 mt-1 block text-[0.68rem] text-charcoal-soft">Vegetarian · GF</small></span></label>
+                </div>
+                <p class="err" data-for="meal"></p>
+              </fieldset>
+
+              <div>
+                <label for="dietary" class="eyebrow">Allergies or Dietary Needs</label>
+                <input id="dietary" name="dietary" type="text" class="field" placeholder="e.g. nut allergy, vegan" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="note" class="eyebrow">A Note for the Couple</label>
+            <textarea id="note" name="note" rows="3" maxlength="500" class="field resize-none" placeholder="Share a wish, a memory, or a song request…"></textarea>
+            <p class="mt-1 text-right text-[0.68rem] text-charcoal-soft"><span id="noteCount">0</span> / 500</p>
+          </div>
+
+          <div class="pt-2 text-center">
+            <button type="submit" id="submitBtn" class="btn btn-gold w-full sm:w-auto">
+              <span id="submitText">Send RSVP</span>
+              <svg id="spinner" class="hidden h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/><path d="M21 12a9 9 0 00-9-9" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <!-- Success state -->
+        <div id="rsvpSuccess" class="hidden py-8 text-center">
+          <svg class="mx-auto h-16 w-16 text-champagne" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="30" />
+            <path id="checkPath" d="M20 33l8 8 16-17" stroke-dasharray="40" stroke-dashoffset="40" style="transition: stroke-dashoffset .8s .2s ease" />
+          </svg>
+          <h3 id="successTitle" class="mt-6 font-serif text-4xl font-light">Thank you!</h3>
+          <p id="successMsg" class="mx-auto mt-4 max-w-md leading-relaxed text-charcoal-soft"></p>
+          <button id="editRsvp" class="mt-8 text-[0.68rem] uppercase tracking-[0.28em] text-champagne-dark link-u">Edit my response</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-charcoal px-5 py-20 text-center text-ivory">
+    <p class="font-script text-6xl text-champagne md:text-7xl" data-aos="fade-up">Eleanor &amp; James</p>
+    <p class="mt-4 text-[0.68rem] uppercase tracking-luxe text-ivory/60" data-aos="fade-up" data-aos-delay="100">06 · 12 · 2027 — Napa Valley</p>
+    <p class="mt-10 text-sm text-ivory/60">Questions? Write to us at <a href="mailto:hello@eleanorandjames.com" class="link-u text-ivory">hello@eleanorandjames.com</a></p>
+    <p class="mt-2 font-serif italic text-ivory/40">#HappilyEverWhitaker</p>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="pointer-events-none fixed bottom-24 left-1/2 z-[80] -translate-x-1/2 translate-y-4 bg-charcoal px-6 py-3 text-xs uppercase tracking-[0.2em] text-ivory opacity-0 shadow-xl transition duration-500"></div>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+  (() => {
+    /* ---------------------------------------------------------
+     * CONFIG — edit these to personalise the invitation
+     * ------------------------------------------------------- */
+    const WEDDING = {
+      date: new Date('2027-06-12T16:00:00-07:00'), // ceremony start (Pacific time)
+      title: 'Eleanor & James — Wedding',
+      location: 'Whitmore Estate, 1250 Silverado Trail, Napa, CA',
+    };
+
+    const PHOTOS = [
+      { src: 'photo-1519741497674-611481863552', cap: 'The first look',            ratio: 'aspect-[3/4]' },
+      { src: 'photo-1511285560929-80b456fea0bc', cap: 'Golden hour in the vines',  ratio: 'aspect-[4/3]' },
+      { src: 'photo-1465495976277-4387d4b0b4c6', cap: 'Just us',                   ratio: 'aspect-[3/4]' },
+      { src: 'photo-1460978812857-470ed1c77af0', cap: 'Setting the table',         ratio: 'aspect-[4/5]' },
+      { src: 'photo-1469371670807-013ccf25f16a', cap: 'Forever starts here',       ratio: 'aspect-[3/4]' },
+      { src: 'photo-1522673607200-164d1b6ce486', cap: 'City strolls',              ratio: 'aspect-[4/3]' },
+      { src: 'photo-1606800052052-a08af7148866', cap: 'Little details',            ratio: 'aspect-[4/5]' },
+      { src: 'photo-1583939003579-730e3918a45a', cap: 'Laughing through it all',   ratio: 'aspect-[3/4]' },
+      { src: 'photo-1537633552985-df8429e8048b', cap: 'Sunset on the coast',       ratio: 'aspect-[4/3]' },
+    ];
+    const unsplash = (id, w) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=75`;
+
+    /* ---------- AOS ---------- */
+    AOS.init({ duration: 1000, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+    /* ---------- Toast ---------- */
+    const toast = document.getElementById('toast');
+    let toastT;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      clearTimeout(toastT);
+      toastT = setTimeout(() => toast.classList.add('opacity-0', 'translate-y-4'), 2600);
+    }
+
+    /* ---------- Nav ---------- */
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function setMenu(open) {
+      mobileMenu.classList.toggle('opacity-0', !open);
+      mobileMenu.classList.toggle('pointer-events-none', !open);
+      menuBtn.setAttribute('aria-expanded', open);
+      const [a, b] = menuBtn.children;
+      a.style.transform = open ? 'translateY(3.5px) rotate(45deg)' : '';
+      b.style.transform = open ? 'translateY(-3.5px) rotate(-45deg)' : '';
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+    /* ---------- Countdown ---------- */
+    const units = {};
+    document.querySelectorAll('[data-unit]').forEach(el => units[el.dataset.unit] = el);
+    const pad = (n, l = 2) => String(n).padStart(l, '0');
+    function tick() {
+      const diff = WEDDING.date - Date.now();
+      if (diff <= 0) {
+        document.getElementById('countdown').classList.add('hidden');
+        document.getElementById('countdownDone').classList.remove('hidden');
+        return clearInterval(timer);
+      }
+      const s = Math.floor(diff / 1000);
+      units.days.textContent    = pad(Math.floor(s / 86400), 3);
+      units.hours.textContent   = pad(Math.floor(s % 86400 / 3600));
+      units.minutes.textContent = pad(Math.floor(s % 3600 / 60));
+      units.seconds.textContent = pad(s % 60);
+    }
+    const timer = setInterval(tick, 1000);
+    tick();
+
+    /* ---------- Save the date (.ics) ---------- */
+    document.getElementById('calBtn').addEventListener('click', () => {
+      const fmt = d => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+      const end = new Date(WEDDING.date.getTime() + 8 * 3600 * 1000);
+      const ics = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//EJ Wedding//EN', 'BEGIN:VEVENT',
+        `UID:ej-wedding-2027@invite`, `DTSTAMP:${fmt(new Date())}`,
+        `DTSTART:${fmt(WEDDING.date)}`, `DTEND:${fmt(end)}`,
+        `SUMMARY:${WEDDING.title}`, `LOCATION:${WEDDING.location.replace(/,/g, '\\,')}`,
+        'DESCRIPTION:Black-Tie Optional. Shuttles depart hotels at 3:00 PM.',
+        'END:VEVENT', 'END:VCALENDAR',
+      ].join('\r\n');
+      const a = Object.assign(document.createElement('a'), {
+        href: URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })),
+        download: 'eleanor-james-wedding.ics',
+      });
+      a.click();
+      URL.revokeObjectURL(a.href);
+      showToast('Added to your calendar ✦');
+    });
+
+    /* ---------- Image fallback (soft gradient if a photo fails) ---------- */
+    function guardImg(img) {
+      img.addEventListener('error', () => { img.removeAttribute('src'); img.alt = ''; img.style.minHeight = '220px'; }, { once: true });
+    }
+    document.querySelectorAll('img.img-fallback').forEach(guardImg);
+
+    /* ---------- Gallery ---------- */
+    const grid = document.getElementById('galleryGrid');
+    PHOTOS.forEach((p, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'group relative block w-full overflow-hidden text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-champagne';
+      btn.setAttribute('data-aos', 'fade-up');
+      btn.setAttribute('data-aos-delay', (i % 3) * 100);
+      btn.setAttribute('aria-label', `Open photo: ${p.cap}`);
+      btn.innerHTML = `
+        <img loading="lazy" src="${unsplash(p.src, 800)}" alt="${p.cap}"
+             class="img-fallback ${p.ratio} w-full object-cover transition duration-[1.4s] ease-out group-hover:scale-105" />
+        <div class="absolute inset-0 flex items-end bg-gradient-to-t from-charcoal/60 via-transparent opacity-0 transition duration-500 group-hover:opacity-100">
+          <p class="translate-y-3 p-5 font-serif text-xl italic text-ivory transition duration-500 group-hover:translate-y-0">${p.cap}</p>
+        </div>`;
+      guardImg(btn.querySelector('img'));
+      btn.addEventListener('click', () => openLb(i));
+      grid.appendChild(btn);
+    });
+
+    /* ---------- Lightbox ---------- */
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const lbCount = document.getElementById('lbCount');
+    let lbIndex = 0, lastFocus = null, touchX = null;
+
+    function renderLb() {
+      const p = PHOTOS[lbIndex];
+      lbImg.style.opacity = 0;
+      lbImg.style.transform = 'scale(.98)';
+      const next = new Image();
+      next.onload = next.onerror = () => {
+        lbImg.src = next.src; lbImg.alt = p.cap;
+        lbImg.style.opacity = 1; lbImg.style.transform = 'scale(1)';
+      };
+      next.src = unsplash(p.src, 1800);
+      lbCap.textContent = p.cap;
+      lbCount.textContent = `${lbIndex + 1} / ${PHOTOS.length}`;
+    }
+    function openLb(i) {
+      lastFocus = document.activeElement;
+      lbIndex = i; renderLb();
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lbClose').focus();
+    }
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      lastFocus && lastFocus.focus();
+    }
+    const step = d => { lbIndex = (lbIndex + d + PHOTOS.length) % PHOTOS.length; renderLb(); };
+
+    document.getElementById('lbClose').addEventListener('click', closeLb);
+    document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+    document.getElementById('lbNext').addEventListener('click', () => step(1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    lb.addEventListener('touchstart', e => touchX = e.touches[0].clientX, { passive: true });
+    lb.addEventListener('touchend', e => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+      touchX = null;
+    });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowRight') step(1);
+      if (e.key === 'ArrowLeft') step(-1);
+    });
+
+    /* ---------- Background music ----------
+     * Plays assets/music.mp3 if present; otherwise falls back to a gentle
+     * Web Audio piano-style progression so the toggle always works. */
+    const audio = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    const musicLabel = document.getElementById('musicLabel');
+    let playing = false, useSynth = false, synth = null;
+
+    function createSynth() {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const master = ctx.createGain(); master.gain.value = 0;
+      const lowpass = ctx.createBiquadFilter(); lowpass.type = 'lowpass'; lowpass.frequency.value = 2400;
+      // Simple feedback delay for a soft, roomy feel
+      const delay = ctx.createDelay(); delay.delayTime.value = 0.38;
+      const fb = ctx.createGain(); fb.gain.value = 0.32;
+      delay.connect(fb).connect(delay);
+      lowpass.connect(master); lowpass.connect(delay); delay.connect(master);
+      master.connect(ctx.destination);
+
+      const hz = n => 440 * Math.pow(2, (n - 69) / 12);
+      // Imaj7 – vi7 – IVmaj7 – V (in F major), arpeggiated
+      const chords = [[53, 60, 64, 69, 72], [50, 57, 60, 65, 69], [46, 53, 57, 62, 65], [48, 55, 60, 64, 67]];
+      const beat = 0.42;
+      let bar = 0, nextTime = 0, loopT = null;
+
+      function note(midi, t, vel, dur) {
+        const o1 = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain();
+        o1.type = 'triangle'; o2.type = 'sine';
+        o1.frequency.value = hz(midi); o2.frequency.value = hz(midi) * 2.001;
+        const g2 = ctx.createGain(); g2.gain.value = 0.25;
+        o1.connect(g); o2.connect(g2).connect(g); g.connect(lowpass);
+        g.gain.setValueAtTime(0, t);
+        g.gain.linearRampToValueAtTime(vel, t + 0.015);
+        g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
+        o1.start(t); o2.start(t); o1.stop(t + dur + 0.05); o2.stop(t + dur + 0.05);
+      }
+      function schedule() {
+        while (nextTime < ctx.currentTime + 1.5) {
+          const c = chords[bar % chords.length];
+          note(c[0] - 12, nextTime, 0.16, beat * 8);
+          const pattern = [1, 2, 3, 4, 3, 2, 3, 4];
+          pattern.forEach((idx, k) => note(c[idx], nextTime + k * beat, k === 0 ? 0.11 : 0.075, beat * 3));
+          if (bar % 2 === 1) note(c[4] + 12, nextTime + beat * 6, 0.05, beat * 4);
+          nextTime += beat * 8; bar++;
+        }
+        loopT = setTimeout(schedule, 400);
+      }
+      return {
+        start() {
+          ctx.resume(); nextTime = ctx.currentTime + 0.1; schedule();
+          master.gain.cancelScheduledValues(ctx.currentTime);
+          master.gain.linearRampToValueAtTime(0.55, ctx.currentTime + 1.5);
+        },
+        stop() {
+          master.gain.cancelScheduledValues(ctx.currentTime);
+          master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+          master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.8);
+          clearTimeout(loopT);
+          setTimeout(() => ctx.suspend(), 900);
+        },
+      };
+    }
+
+    function setMusicUI(on) {
+      playing = on;
+      musicBtn.classList.toggle('music-on', on);
+      musicBtn.setAttribute('aria-pressed', on);
+      musicBtn.setAttribute('aria-label', on ? 'Pause background music' : 'Play background music');
+      musicLabel.textContent = on ? 'Pause' : 'Play Music';
+    }
+    async function playMusic() {
+      if (!useSynth) {
+        try {
+          audio.volume = 0; await audio.play();
+          let v = 0; const f = setInterval(() => { v = Math.min(0.5, v + 0.05); audio.volume = v; if (v >= 0.5) clearInterval(f); }, 120);
+          return setMusicUI(true);
+        } catch { useSynth = true; }
+      }
+      synth = synth || createSynth();
+      synth.start();
+      setMusicUI(true);
+    }
+    function pauseMusic() {
+      useSynth ? synth && synth.stop() : audio.pause();
+      setMusicUI(false);
+    }
+    audio.addEventListener('error', () => { useSynth = true; });
+    musicBtn.addEventListener('click', () => playing ? pauseMusic() : playMusic());
+
+    /* ---------- RSVP form ---------- */
+    const form = document.getElementById('rsvpForm');
+    const attendingFields = document.getElementById('attendingFields');
+    const guests = document.getElementById('guests');
+    const plusOneWrap = document.getElementById('plusOneWrap');
+    const note = document.getElementById('note');
+    const STORE_KEY = 'ej-rsvp';
+
+    const setErr = (name, msg) => {
+      const el = form.querySelector(`.err[data-for="${name}"]`);
+      if (el) el.textContent = msg || '';
+      const input = form.elements[name];
+      if (input && input.classList) input.classList.toggle('invalid', !!msg);
+    };
+
+    function toggleAttending() {
+      const yes = form.attending.value === 'yes';
+      attendingFields.style.gridTemplateRows = yes ? '1fr' : '0fr';
+      attendingFields.style.opacity = yes ? 1 : 0;
+      attendingFields.querySelectorAll('input, select').forEach(el => el.tabIndex = yes ? 0 : -1);
+    }
+    form.querySelectorAll('input[name="attending"]').forEach(r => r.addEventListener('change', () => { setErr('attending'); toggleAttending(); }));
+    form.querySelectorAll('input[name="meal"]').forEach(r => r.addEventListener('change', () => setErr('meal')));
+    guests.addEventListener('change', () => plusOneWrap.classList.toggle('hidden', guests.value !== '2'));
+    note.addEventListener('input', () => document.getElementById('noteCount').textContent = note.value.length);
+    ['name', 'email', 'plusOne'].forEach(n => form.elements[n].addEventListener('input', () => setErr(n)));
+    toggleAttending();
+
+    function validate() {
+      const d = Object.fromEntries(new FormData(form));
+      let ok = true;
+      const fail = (n, m) => { setErr(n, m); ok = false; };
+      if (!d.name || d.name.trim().length < 2) fail('name', 'Please enter your full name.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email || '')) fail('email', 'Please enter a valid email address.');
+      if (!d.attending) fail('attending', 'Please let us know if you can make it.');
+      if (d.attending === 'yes') {
+        if (!d.meal) fail('meal', 'Please choose a meal.');
+        if (d.guests === '2' && !(d.plusOne || '').trim()) fail('plusOne', 'Please add your guest’s name.');
+      }
+      if (!ok) {
+        const first = form.querySelector('.err:not(:empty)');
+        first && first.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return ok ? d : null;
+    }
+
+    function showSuccess(d) {
+      const first = d.name.trim().split(' ')[0];
+      document.getElementById('successTitle').textContent = d.attending === 'yes' ? `See you there, ${first}!` : `We’ll miss you, ${first}`;
+      document.getElementById('successMsg').textContent = d.attending === 'yes'
+        ? `Your RSVP for ${d.guests === '2' ? 'two' : 'one'} has been received. A confirmation will be sent to ${d.email}. We can’t wait to celebrate with you in Napa.`
+        : 'Thank you for letting us know. You’ll be in our hearts on the day — we’ll raise a glass to you.';
+      form.classList.add('hidden');
+      const s = document.getElementById('rsvpSuccess');
+      s.classList.remove('hidden');
+      requestAnimationFrame(() => document.getElementById('checkPath').style.strokeDashoffset = 0);
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const data = validate();
+      if (!data) return;
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      document.getElementById('submitText').textContent = 'Sending';
+      document.getElementById('spinner').classList.remove('hidden');
+
+      /* To collect responses for real, replace this block with e.g.:
+       *   await fetch('https://formspree.io/f/YOUR_ID', {
+       *     method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+       *     body: JSON.stringify(data),
+       *   });
+       */
+      await new Promise(r => setTimeout(r, 1100));
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch {}
+
+      btn.disabled = false;
+      document.getElementById('submitText').textContent = 'Send RSVP';
+      document.getElementById('spinner').classList.add('hidden');
+      showSuccess(data);
+      showToast('RSVP received ✦');
+    });
+
+    document.getElementById('editRsvp').addEventListener('click', () => {
+      document.getElementById('rsvpSuccess').classList.add('hidden');
+      document.getElementById('checkPath').style.strokeDashoffset = 40;
+      form.classList.remove('hidden');
+    });
+
+    // Restore a previous response for returning guests
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+      if (saved) {
+        Object.entries(saved).forEach(([k, v]) => {
+          const el = form.elements[k];
+          if (!el) return;
+          if (el instanceof RadioNodeList) { const r = [...el].find(x => x.value === v); if (r) r.checked = true; }
+          else el.value = v;
+        });
+        toggleAttending();
+        guests.dispatchEvent(new Event('change'));
+        note.dispatchEvent(new Event('input'));
+        showSuccess(saved);
+      }
+    } catch {}
+  })();
+  </script>
+</body>
+</html>
